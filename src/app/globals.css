@@ -14,11 +14,15 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-cuba-blue rounded-lg hover:bg-blue-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cuba-blue;
+    @apply inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-cuba-blue rounded-full hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cuba-blue shadow-lg hover:shadow-xl hover:-translate-y-0.5;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium text-cuba-blue bg-white border-2 border-cuba-blue rounded-lg hover:bg-blue-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cuba-blue;
+    @apply inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-transparent border-2 border-white rounded-full hover:bg-white hover:text-cuba-blue transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-cuba-blue bg-white border-2 border-cuba-blue rounded-full hover:bg-cuba-blue hover:text-white transition-all duration-300;
   }
 
   .section-title {
@@ -30,7 +34,81 @@
   }
 
   .card {
-    @apply bg-white rounded-2xl shadow-lg p-6 md:p-8 hover:shadow-xl transition-shadow duration-300;
+    @apply bg-white rounded-2xl shadow-lg p-6 md:p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1;
+  }
+
+  /* Parallax sections */
+  .parallax-section {
+    @apply relative min-h-screen flex items-center justify-center overflow-hidden;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .parallax-overlay {
+    @apply absolute inset-0;
+    background: linear-gradient(135deg, rgba(0, 37, 144, 0.85) 0%, rgba(207, 20, 43, 0.75) 100%);
+  }
+
+  .parallax-overlay-dark {
+    @apply absolute inset-0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 37, 144, 0.8) 100%);
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl;
+  }
+
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-md border border-white/10 rounded-2xl;
+  }
+
+  /* Feature cards with gradient border */
+  .feature-card {
+    @apply relative bg-white rounded-2xl p-8 overflow-hidden;
+    box-shadow: 0 10px 40px rgba(0, 37, 144, 0.1);
+  }
+
+  .feature-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-1;
+    background: linear-gradient(90deg, #002590 0%, #CF142B 100%);
+  }
+
+  /* Animated gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #002590 0%, #CF142B 50%, #002590 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  /* Stats counter */
+  .stat-card {
+    @apply text-center p-8;
+  }
+
+  .stat-number {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-2;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Image with overlay */
+  .image-overlay {
+    @apply relative overflow-hidden rounded-2xl;
+  }
+
+  .image-overlay::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300;
+  }
+
+  .image-overlay:hover::after {
+    @apply opacity-100;
   }
 }
 
@@ -42,4 +120,110 @@
   .bg-gradient-cuba {
     background: linear-gradient(135deg, #002590 0%, #CF142B 100%);
   }
+
+  .bg-gradient-cuba-dark {
+    background: linear-gradient(135deg, #001a66 0%, #8f0f1e 100%);
+  }
+
+  .bg-gradient-overlay {
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 37, 144, 0.9) 100%);
+  }
+
+  /* Fade in animations */
+  .fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .fade-in-delay-1 {
+    animation-delay: 0.2s;
+  }
+
+  .fade-in-delay-2 {
+    animation-delay: 0.4s;
+  }
+
+  .fade-in-delay-3 {
+    animation-delay: 0.6s;
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Pulse animation for CTA */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(207, 20, 43, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(207, 20, 43, 0.8);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #002590 0%, #CF142B 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #001a66 0%, #8f0f1e 100%);
 }
